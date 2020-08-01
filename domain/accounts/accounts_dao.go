@@ -7,9 +7,9 @@ import (
 	"github.com/flucas97/CNG-checknogreen/account/db/postgres/accounts_db"
 	"github.com/flucas97/CNG-checknogreen/account/utils/crypto"
 	"github.com/flucas97/CNG-checknogreen/account/utils/date"
+	"github.com/flucas97/CNG-checknogreen/account/utils/error_factory"
 
 	"github.com/flucas97/CNG-checknogreen/account/utils/logger"
-	"github.com/flucas97/bookstore/users-api/utils/error_factory"
 )
 
 const (
