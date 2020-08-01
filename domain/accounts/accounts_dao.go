@@ -13,7 +13,11 @@ import (
 )
 
 const (
-	queryCreateAccount = ("INSERT INTO accounts(name, language, password, country, city, description) VALUES (?, ?, ?, ?, ?, ?);")
+	queryCreateAccount = ("
+		INSERT INTO accounts(
+			name, email, language, password, country, city, description)
+				VALUES (?, ?, ?, ?, ?, ?);"
+	)
 	statusActive       = "active"
 	statusEnded        = "ended"
 )
@@ -30,7 +34,7 @@ func (account *Account) Create() *error_factory.restErr {
 	account.CreatedAt, account.UpdatedAt, account.Status = date.GetNowString(), date.GetNowString(), statusActive
 	account.Password = crypto.GetMd5(account.Password)
 
-	insertResult, err := stmt.Exec(account.Name, account.Language, account.Password, account.Country, account.City, account.Description, account.Status, account.CreatedAt, account.UpdatedAt)
+	insertResult, err := stmt.Exec(account.Name, account.Email, account.Language, account.Password, account.Country, account.City, account.Description, account.Status, account.CreatedAt, account.UpdatedAt)
 	if err != nil {
 		if strings.Contains(err.Error(), "Duplicate entry") {
 			return error_factory.NewBadRequestError(fmt.Sprintf("account '%v' already exists", account.Name))
