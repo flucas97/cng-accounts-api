@@ -1,7 +1,12 @@
 package accounts_service
 
+import (
+	"github.com/flucas97/CNG-checknogreen/account/domain/accounts"
+	"github.com/flucas97/CNG-checknogreen/account/utils/error_factory"
+)
+
 type AccountsServiceInterface interface {
-	Create()
+	Create(account accounts.Account) (*accounts.Account, *error_factory.RestErr)
 	Update()
 	Login()
 	Validate()
@@ -17,8 +22,12 @@ var (
 )
 
 // Create Account
-func (as *accountsService) Create() {
+func (as *accountsService) Create(account accounts.Account) (*accounts.Account, *error_factory.RestErr) {
+	if err := account.Create(); err != nil {
+		return nil, err
+	}
 
+	return &account, nil
 }
 
 // Update Account

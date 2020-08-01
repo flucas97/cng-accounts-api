@@ -8,22 +8,22 @@ import (
 	"github.com/flucas97/CNG-checknogreen/account/utils/crypto"
 	"github.com/flucas97/CNG-checknogreen/account/utils/date"
 	"github.com/flucas97/CNG-checknogreen/account/utils/error_factory"
-
 	"github.com/flucas97/CNG-checknogreen/account/utils/logger"
 )
 
 const (
-	queryCreateAccount = ("
-		INSERT INTO accounts(
-			name, email, language, password, country, city, description)
-				VALUES (?, ?, ?, ?, ?, ?);"
-	)
+	queryCreateAccount = ("INSERT INTO accounts(name, email, language, password, country, city, description) VALUES (?, ?, ?, ?, ?, ?, ?);")
 	statusActive       = "active"
 	statusEnded        = "ended"
 )
 
 // Create Account
-func (account *Account) Create() *error_factory.restErr {
+func (account *Account) Create() *error_factory.RestErr {
+	// check if is everything OK accessing the DB
+	if err := accounts_db.Client.Ping(); err != nil {
+		panic(err)
+	}
+
 	stmt, err := accounts_db.Client.Prepare(queryCreateAccount)
 	if err != nil {
 		logger.Error("error while preparing Create query", err)

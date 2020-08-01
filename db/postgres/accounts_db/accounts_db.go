@@ -21,6 +21,7 @@ var (
 )
 
 func init() {
+	var err error
 	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s "+
 		"password=%s dbname=%s sslmode=disable",
 		postgrsql_host,
@@ -36,7 +37,7 @@ func init() {
 		panic(err)
 	}
 
-	err = db.Ping()
+	err = Client.Ping()
 	if err != nil {
 		logger.Error("cannot ping database", err)
 		panic(err)
