@@ -7,7 +7,6 @@ type Account struct {
 	Status               string   `json:"status"`
 	AvaliableFeatures    []string `json:"avaliable_features"`
 	Language             string   `json:"language"`
-	UsersRepositoryID    int64    `belongs_to:"users_repository_id" json:"user_repository_id"`
 }
 
 /*
@@ -19,7 +18,6 @@ CREATE TABLE accounts (
 	STATUS TEXT NOT NULL,
 	AVALIABLE_FEATURES TEXT,
 	LANGUAGE TEXT NOT NULL,
-	USERS_REPOSITORY_ID INT
 );
 
 */
