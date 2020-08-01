@@ -1,4 +1,4 @@
-# ChecknoGreen (CNG) Accounts micro service
+# (CNG) ChecknoGreen Accounts micro service
 
 Info about Accounts
 
