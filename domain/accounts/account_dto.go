@@ -7,6 +7,11 @@ type Account struct {
 	Status               string   `json:"status"`
 	AvaliableFeatures    []string `json:"avaliable_features"`
 	Language             string   `json:"language"`
+	Password             string   `json:"password"`
+	Token                string   `json:"token"`
+	Country              string   `json:"country"`
+	City                 string   `json:"city"`
+	Description          string   `json:"description"`
 }
 
 /*
@@ -18,6 +23,7 @@ CREATE TABLE accounts (
 	STATUS TEXT NOT NULL,
 	AVALIABLE_FEATURES TEXT,
 	LANGUAGE TEXT NOT NULL,
+	TOKEN TEXT
 );
 
 */
