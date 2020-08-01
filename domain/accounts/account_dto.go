@@ -13,4 +13,6 @@ type Account struct {
 	Country              string   `json:"country"`
 	City                 string   `json:"city"`
 	Description          string   `json:"description"`
+	CreatedAt            string   `json:"created_at`
+	UpdatedAt            string   `json:"update_at`
 }
