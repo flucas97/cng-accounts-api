@@ -16,6 +16,10 @@ const (
 	postgrsql_database_bname = "CNG-Account"
 )
 
+var (
+	Client *sql.DB
+)
+
 func init() {
 	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s "+
 		"password=%s dbname=%s sslmode=disable",
@@ -26,12 +30,11 @@ func init() {
 		postgrsql_database_bname,
 	)
 
-	db, err := sql.Open("postgres", psqlInfo)
+	Client, err = sql.Open("postgres", psqlInfo)
 	if err != nil {
 		logger.Error("cannot open database connection", err)
 		panic(err)
 	}
-	defer db.Close()
 
 	err = db.Ping()
 	if err != nil {
