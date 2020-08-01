@@ -1,16 +1,16 @@
-package errors_utils
+package error_factory
 
 import "net/http"
 
-type errorFactory struct {
+type restErr struct {
 	Message string `json:"message"`
 	Status  int    `json:"status"`
 	Error   string `json:"error"`
 }
 
 // NewBadRequestError returns a new bad request as RestErr struct
-func NewBadRequestError(message string) *errorFactory {
-	return &errorFactory{
+func NewBadRequestError(message string) *restErr {
+	return &restErr{
 		Message: message,
 		Status:  http.StatusBadRequest,
 		Error:   "bad_request",
@@ -18,8 +18,8 @@ func NewBadRequestError(message string) *errorFactory {
 }
 
 // NewNotFoundError returns a new not found request as RestErr struct
-func NewNotFoundError(message string) *errorFactory {
-	return &errorFactory{
+func NewNotFoundError(message string) *restErr {
+	return &restErr{
 		Message: message,
 		Status:  http.StatusNotFound,
 		Error:   "not_found",
@@ -27,8 +27,8 @@ func NewNotFoundError(message string) *errorFactory {
 }
 
 // NewInternalServerError returns a new not found request as RestErr struct
-func NewInternalServerError(message string) *errorFactory {
-	return &errorFactory{
+func NewInternalServerError(message string) *restErr {
+	return &restErr{
 		Message: message,
 		Status:  http.StatusInternalServerError,
 		Error:   "internal_server_error",
