@@ -23,7 +23,7 @@ func (account *Account) Create() *error_factory.restErr {
 	stmt, err := accounts_db.Client.Prepare(queryCreateAccount)
 	if err != nil {
 		logger.Error("error while preparing Create query", err)
-		return errors.NewInternalServerError("an error occurred while creating account. Try again")
+		return error_factory.NewInternalServerError("an error occurred while creating account. Try again")
 	}
 	defer stmt.Close()
 
@@ -39,7 +39,7 @@ func (account *Account) Create() *error_factory.restErr {
 	accountID, err := insertResult.LastInsertId()
 	if err != nil {
 		logger.Error("error while saving account in database query", err)
-		return errors.NewInternalServerError(fmt.Sprintf("error when trying to save account: %s", err.Error()))
+		return error_factory.NewInternalServerError(fmt.Sprintf("error when trying to save account: %s", err.Error()))
 	}
 
 	account.ID = accountID
