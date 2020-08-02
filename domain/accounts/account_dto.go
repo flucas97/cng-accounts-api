@@ -20,8 +20,8 @@ type Account struct {
 	Description          string   `json:"description"`
 	Language             string   `json:"language"`
 	Status               string   `json:"status"`
-	CreatedAt            string   `json:"created_at`
-	UpdatedAt            string   `json:"updated_at`
+	CreatedAt            string   `json:"created_at"`
+	UpdatedAt            string   `json:"updated_at"`
 }
 
 func (a *Account) Validate() *error_factory.RestErr {

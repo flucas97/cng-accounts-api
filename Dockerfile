@@ -1,4 +1,4 @@
-From golang
+FROM golang
 ARG app_env
 ENV APP_ENV $app_env
 COPY ./app /go/src/github.com/flucas97/CNG-checknogreen/account/app
