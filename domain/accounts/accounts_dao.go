@@ -1,6 +1,8 @@
 package accounts
 
 import (
+	"strings"
+
 	"github.com/flucas97/CNG-checknogreen/account/db/postgres/accounts_db"
 	"github.com/flucas97/CNG-checknogreen/account/utils/crypto"
 	"github.com/flucas97/CNG-checknogreen/account/utils/date"
@@ -28,6 +30,9 @@ func (account *Account) Create() *error_factory.RestErr {
 	accountID := 0
 	err = accounts_db.Client.QueryRow(queryCreateAccount, account.Name, account.Email, account.Language, account.Password, account.Country, account.City, account.Description, account.Status, account.CreatedAt, account.UpdatedAt).Scan(&accountID)
 	if err != nil {
+		if strings.Contains(err.Error(), "duplicate key value") {
+			return error_factory.NewBadRequestError("email or account already exists.")
+		}
 		logger.Error("error querying row", err)
 		return error_factory.NewInternalServerError("error saving account, try again")
 	}
