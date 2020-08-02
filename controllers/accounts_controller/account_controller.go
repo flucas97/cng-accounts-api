@@ -54,3 +54,21 @@ func Login(c *gin.Context) {
 
 	c.JSON(http.StatusNotFound, result)
 }
+
+func ShowDetails(c *gin.Context) {
+	var accountName accounts.Account
+
+	if err := c.ShouldBindJSON(&accountName); err != nil {
+		RestErr := error_factory.NewBadRequestError("Invalid JSON body")
+		c.JSON(RestErr.Status, RestErr)
+		return
+	}
+
+	account, err := accountsService.ShowDetails(accountName)
+	if err != nil {
+		c.JSON(err.Status, err)
+		return
+	}
+
+	c.JSON(http.StatusCreated, account.Marshall())
+}

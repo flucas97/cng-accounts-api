@@ -12,6 +12,7 @@ type AccountsServiceInterface interface {
 	Login(accounts.Account) (bool, *error_factory.RestErr)
 	Delete()
 	Freeze()
+	ShowDetails(accounts.Account) (*accounts.Account, *error_factory.RestErr)
 }
 
 type accountsService struct{}
@@ -62,4 +63,12 @@ func (as *accountsService) Delete() {
 // Freeze Account
 func (as *accountsService) Freeze() {
 
+}
+
+func (as *accountsService) ShowDetails(account accounts.Account) (*accounts.Account, *error_factory.RestErr) {
+	if err := account.ShowDetails(); err != nil {
+		return nil, err
+	}
+
+	return &account, nil
 }

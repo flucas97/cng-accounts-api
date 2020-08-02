@@ -13,6 +13,7 @@ import (
 const (
 	queryCreateAccount = ("INSERT INTO accounts (name, email, language, password, country, city, description, status, created_at, updated_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING id;")
 	queryLogin         = ("SELECT name, password FROM accounts WHERE name=$1 AND password=$2;")
+	queryShowDetails   = ("SELECT id, name, email, country, city, description, created_at, updated_at FROM accounts WHERE name=$1;")
 	statusActive       = "active"
 	statusEnded        = "ended"
 )
@@ -44,6 +45,26 @@ func (account *Account) Create() *error_factory.RestErr {
 
 // Update Account
 func (account *Account) Update() {
+
+}
+
+func (account *Account) ShowDetails() *error_factory.RestErr {
+	var err error
+
+	if err := accounts_db.Client.Ping(); err != nil {
+		panic(err)
+	}
+
+	err = accounts_db.Client.QueryRow(queryShowDetails, account.Name).Scan(&account.ID, &account.Name, &account.Email, &account.Country, &account.City, &account.Description, &account.CreatedAt, &account.UpdatedAt)
+	if err != nil {
+		if strings.Contains(err.Error(), "no rows in result set") {
+			return error_factory.NewNotFoundError("not found")
+		}
+
+		logger.Error("error while preparing query", err)
+		return error_factory.NewInternalServerError("error, try again")
+	}
+	return nil
 
 }
 
