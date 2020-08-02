@@ -11,8 +11,8 @@ import (
 const (
 	postgrsql_host           = "localhost"
 	postgrsql_port           = 5432
-	postgrsql_user           = "feijo"
-	postgrsql_password       = "root"
+	postgrsql_user           = "master"
+	postgrsql_password       = "master"
 	postgrsql_database_bname = "CNG-Account"
 )
 
