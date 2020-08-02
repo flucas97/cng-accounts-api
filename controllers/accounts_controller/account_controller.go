@@ -30,3 +30,30 @@ func Create(c *gin.Context) {
 
 	c.JSON(http.StatusCreated, result)
 }
+
+func Login(c *gin.Context) {
+	var account accounts.Account
+
+	if err := c.ShouldBindJSON(&account); err != nil {
+		RestErr := error_factory.NewBadRequestError("Invalid JSON body")
+		c.JSON(RestErr.Status, RestErr)
+		return
+	}
+
+	result, err := accountsService.Login(account)
+	if err != nil {
+		c.JSON(err.Status, err)
+		return
+	}
+
+	if result {
+		c.JSON(http.StatusOK, error_factory.RestErr{
+			Message: "Successfuly login",
+			Status:  200,
+			Error:   "",
+		})
+		return
+	}
+
+	c.JSON(http.StatusNotFound, result)
+}

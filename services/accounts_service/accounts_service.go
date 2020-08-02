@@ -2,13 +2,14 @@ package accounts_service
 
 import (
 	"github.com/flucas97/CNG-checknogreen/account/domain/accounts"
+	"github.com/flucas97/CNG-checknogreen/account/utils/crypto"
 	"github.com/flucas97/CNG-checknogreen/account/utils/error_factory"
 )
 
 type AccountsServiceInterface interface {
-	Create(account accounts.Account) (*accounts.Account, *error_factory.RestErr)
+	Create(accounts.Account) (*accounts.Account, *error_factory.RestErr)
 	Update()
-	Login()
+	Login(accounts.Account) (bool, *error_factory.RestErr)
 	Validate()
 	Delete()
 	Freeze()
@@ -36,8 +37,18 @@ func (as *accountsService) Update() {
 }
 
 // Login Account
-func (as *accountsService) Login() {
+func (as *accountsService) Login(credentials accounts.Account) (bool, *error_factory.RestErr) {
+	requestLogin := &accounts.Account{
+		Name:     credentials.Name,
+		Password: crypto.GetMd5(credentials.Password),
+	}
 
+	result, err := requestLogin.Login()
+	if err != nil {
+		return result, err
+	}
+
+	return result, nil
 }
 
 // Validate Account

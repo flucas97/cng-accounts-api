@@ -12,6 +12,7 @@ import (
 
 const (
 	queryCreateAccount = ("INSERT INTO accounts (name, email, language, password, country, city, description, status, created_at, updated_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING id;")
+	queryLogin         = ("SELECT name, password FROM accounts WHERE name=$1 AND password=$2;")
 	statusActive       = "active"
 	statusEnded        = "ended"
 )
@@ -47,8 +48,23 @@ func (account *Account) Update() {
 }
 
 // Login Account
-func (account *Account) Login() {
+func (credentials *Account) Login() (bool, *error_factory.RestErr) {
+	var err error
 
+	if err := accounts_db.Client.Ping(); err != nil {
+		panic(err)
+	}
+
+	err = accounts_db.Client.QueryRow(queryLogin, credentials.Name, credentials.Password).Scan(&credentials.Name, &credentials.Password)
+	if err != nil {
+		if strings.Contains(err.Error(), "no rows in result set") {
+			return false, error_factory.NewNotFoundError("not found")
+		}
+
+		logger.Error("error while preparing query", err)
+		return false, error_factory.NewInternalServerError("error, try again")
+	}
+	return true, nil
 }
 
 // Validate Account
