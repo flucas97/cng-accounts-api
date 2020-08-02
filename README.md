@@ -5,7 +5,7 @@ Info about Accounts
 ### Avaliable routes:
 
 #### POST
-path: /login
+path: /validate
 
 #### POST 
 path: /new-account

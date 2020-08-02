@@ -48,7 +48,7 @@ func Login(c *gin.Context) {
 	}
 
 	if result {
-		c.JSON(http.StatusOK, success_response.Found("successfully login"))
+		c.JSON(http.StatusOK, success_response.Found("successfully validate"))
 		return
 	}
 

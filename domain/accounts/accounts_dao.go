@@ -83,7 +83,7 @@ func (credentials *Account) Login() (bool, *error_factory.RestErr) {
 		}
 
 		logger.Error("error while preparing query", err)
-		return false, error_factory.NewInternalServerError("error while requesting login, try again")
+		return false, error_factory.NewInternalServerError("error while requesting validate, try again")
 	}
 	return true, nil
 }
