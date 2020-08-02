@@ -67,11 +67,6 @@ func (credentials *Account) Login() (bool, *error_factory.RestErr) {
 	return true, nil
 }
 
-// Validate Account
-func (account *Account) Validate() {
-
-}
-
 // Delete Account
 func (account *Account) Delete() {
 

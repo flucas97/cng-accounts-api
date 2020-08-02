@@ -10,7 +10,6 @@ type AccountsServiceInterface interface {
 	Create(accounts.Account) (*accounts.Account, *error_factory.RestErr)
 	Update()
 	Login(accounts.Account) (bool, *error_factory.RestErr)
-	Validate()
 	Delete()
 	Freeze()
 }
@@ -49,11 +48,6 @@ func (as *accountsService) Login(credentials accounts.Account) (bool, *error_fac
 	}
 
 	return result, nil
-}
-
-// Validate Account
-func (as *accountsService) Validate() {
-
 }
 
 // Delete Account
