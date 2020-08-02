@@ -4,16 +4,16 @@ package accounts
 type Account struct {
 	ID                   int64    `json:"id"`
 	Name                 string   `json:"name"`
-	CannabisRepositoryID int64    `belongs_to:"cannabis_repository_id" json:"cannabis_repository_id"`
-	Status               string   `json:"status"`
-	AvaliableFeatures    []string `json:"avaliable_features"`
-	Language             string   `json:"language"`
+	Email                string   `json:"email"`
 	Password             string   `json:"password"`
-	Token                string   `json:"token"`
-	Country              string   `json:"country"`
 	City                 string   `json:"city"`
+	Country              string   `json:"country"`
+	State                string   `json:"state"`
+	AvaliableFeatures    []string `json:"avaliable_features"`
+	CannabisRepositoryID int64    `belongs_to:"cannabis_repository_id" json:"cannabis_repository_id"`
 	Description          string   `json:"description"`
+	Language             string   `json:"language"`
+	Status               string   `json:"status"`
 	CreatedAt            string   `json:"created_at`
 	UpdatedAt            string   `json:"updated_at`
-	Email                string   `json:"email"`
 }
