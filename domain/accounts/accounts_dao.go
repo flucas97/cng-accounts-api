@@ -36,7 +36,7 @@ func (account *Account) Create() *error_factory.RestErr {
 			return error_factory.NewBadRequestError("email or account already exists.")
 		}
 		logger.Error("error querying row", err)
-		return error_factory.NewInternalServerError("error saving account, try again")
+		return error_factory.NewInternalServerError("error while saving account, try again")
 	}
 
 	account.ID = int64(accountID)
@@ -58,11 +58,11 @@ func (account *Account) ShowDetails() *error_factory.RestErr {
 	err = accounts_db.Client.QueryRow(queryShowDetails, account.Name).Scan(&account.ID, &account.Name, &account.Email, &account.Country, &account.City, &account.Description, &account.CreatedAt, &account.UpdatedAt)
 	if err != nil {
 		if strings.Contains(err.Error(), "no rows in result set") {
-			return error_factory.NewNotFoundError("not found")
+			return error_factory.NewNotFoundError("account not found")
 		}
 
 		logger.Error("error while preparing query", err)
-		return error_factory.NewInternalServerError("error, try again")
+		return error_factory.NewInternalServerError("error searching account informations, try again")
 	}
 	return nil
 
@@ -83,7 +83,7 @@ func (credentials *Account) Login() (bool, *error_factory.RestErr) {
 		}
 
 		logger.Error("error while preparing query", err)
-		return false, error_factory.NewInternalServerError("error, try again")
+		return false, error_factory.NewInternalServerError("error while requesting login, try again")
 	}
 	return true, nil
 }
