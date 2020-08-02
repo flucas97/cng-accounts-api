@@ -4,11 +4,11 @@ Info about Accounts
 
 ### Avaliable routes:
 
-#### GET / POST / PUT / DELETE
-path: /account
-
-#### POST 
-path: /validate
-
 #### POST
 path: /login
+
+#### POST 
+path: /new-account
+
+#### POST
+path: /account-details
