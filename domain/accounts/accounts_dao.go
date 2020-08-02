@@ -68,8 +68,8 @@ func (account *Account) ShowDetails() *error_factory.RestErr {
 
 }
 
-// Login Account
-func (credentials *Account) Login() (bool, *error_factory.RestErr) {
+// ValidateAccount
+func (credentials *Account) ValidateAccount() (bool, *error_factory.RestErr) {
 	var err error
 
 	if err := accounts_db.Client.Ping(); err != nil {

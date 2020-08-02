@@ -11,6 +11,6 @@ func Routes() {
 
 	// accounts
 	router.POST("/new-account", accounts_controller.Create)
-	router.POST("/validate", accounts_controller.Login)
+	router.POST("/validate", accounts_controller.Validate)
 	router.POST("/account-details", accounts_controller.ShowDetails)
 }

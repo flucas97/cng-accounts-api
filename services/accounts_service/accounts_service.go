@@ -9,7 +9,7 @@ import (
 type AccountsServiceInterface interface {
 	Create(accounts.Account) (*accounts.Account, *error_factory.RestErr)
 	Update()
-	Login(accounts.Account) (bool, *error_factory.RestErr)
+	Validate(accounts.Account) (bool, *error_factory.RestErr)
 	Delete()
 	Freeze()
 	ShowDetails(accounts.Account) (*accounts.Account, *error_factory.RestErr)
@@ -40,14 +40,14 @@ func (as *accountsService) Update() {
 
 }
 
-// Login Account
-func (as *accountsService) Login(credentials accounts.Account) (bool, *error_factory.RestErr) {
+// Validate Account
+func (as *accountsService) Validate(credentials accounts.Account) (bool, *error_factory.RestErr) {
 	requestLogin := &accounts.Account{
 		Name:     credentials.Name,
 		Password: crypto.GetMd5(credentials.Password),
 	}
 
-	result, err := requestLogin.Login()
+	result, err := requestLogin.ValidateAccount()
 	if err != nil {
 		return result, err
 	}

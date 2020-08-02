@@ -32,7 +32,7 @@ func Create(c *gin.Context) {
 	c.JSON(http.StatusCreated, result)
 }
 
-func Login(c *gin.Context) {
+func Validate(c *gin.Context) {
 	var account accounts.Account
 
 	if err := c.ShouldBindJSON(&account); err != nil {
@@ -41,7 +41,7 @@ func Login(c *gin.Context) {
 		return
 	}
 
-	result, err := accountsService.Login(account)
+	result, err := accountsService.Validate(account)
 	if err != nil {
 		c.JSON(err.Status, err)
 		return
