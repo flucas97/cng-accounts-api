@@ -6,6 +6,7 @@ import (
 	"github.com/flucas97/CNG-checknogreen/account/domain/accounts"
 	"github.com/flucas97/CNG-checknogreen/account/services/accounts_service"
 	"github.com/flucas97/CNG-checknogreen/account/utils/error_factory"
+	"github.com/flucas97/CNG-checknogreen/account/utils/success_response"
 	"github.com/gin-gonic/gin"
 )
 
@@ -47,11 +48,7 @@ func Login(c *gin.Context) {
 	}
 
 	if result {
-		c.JSON(http.StatusOK, error_factory.RestErr{
-			Message: "Successfuly login",
-			Status:  200,
-			Error:   "",
-		})
+		c.JSON(http.StatusOK, success_response.Found("successfully login"))
 		return
 	}
 
