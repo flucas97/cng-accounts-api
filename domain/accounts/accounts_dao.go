@@ -21,7 +21,6 @@ const (
 // Create Account
 func (account *Account) Create() *error_factory.RestErr {
 	var err error
-	// check if is everything OK accessing the DB
 	if err = accounts_db.Client.Ping(); err != nil {
 		panic(err)
 	}
@@ -48,6 +47,7 @@ func (account *Account) Update() {
 
 }
 
+// ShowDetails get info about one account
 func (account *Account) ShowDetails() *error_factory.RestErr {
 	var err error
 
