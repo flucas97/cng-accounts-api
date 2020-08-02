@@ -23,6 +23,10 @@ var (
 
 // Create Account
 func (as *accountsService) Create(account accounts.Account) (*accounts.Account, *error_factory.RestErr) {
+	if err := account.Validate(); err != nil {
+		return nil, err
+	}
+
 	if err := account.Create(); err != nil {
 		return nil, err
 	}
