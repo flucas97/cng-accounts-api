@@ -1,24 +1,9 @@
-version: '2'
-services:
-  db:
-    build: ./db
-    volumes:
-      - ./db/pgdata:/pgdata
-    ports:
-      - "5432"
-    environment:
-      - POSTGRES_USER=docker
-      - POSTGRES_PASSWORD=docker
-      - PGDATA=/pgdata
+version: '3'
 
+services:
   api:
-    build:
-      context: ./account
-      args:
-        app_env: ${APP_ENV}
+    build: .
     volumes:
       - ./go/src/github.com/flucas97/CNG-checknogreen/
     ports:
       - "8081:8081"
-    links:
-      - db
