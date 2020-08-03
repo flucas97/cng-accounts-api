@@ -4,7 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 
-	"github.com/flucas97/bookstore/users-api/logger"
+	"github.com/flucas97/CNG-checknogreen/account/utils/logger"
 	_ "github.com/lib/pq"
 )
 

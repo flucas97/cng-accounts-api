@@ -1,17 +1,11 @@
-FROM golang
-ARG app_env
-ENV APP_ENV $app_env
-COPY ./app /go/src/github.com/flucas97/CNG-checknogreen/account/app
-WORKDIR /go/src/github.com/flucas97/CNG-checknogreen/account/app
-RUN go get ./
-RUN go build
+FROM golang:latest
+LABEL maintainer="flucas97 <feijolucas19972gmail.com>"
 
-CMD if [ ${APP_ENV} = production ]; \
-	then \
-	app; \
-	else \
-	go get github.com/pilu/fresh && \
-	fresh; \
-	fi
-	
+WORKDIR /account
+COPY go.mod ./
+RUN go mod download
+COPY . .
+RUN go build -o main .
+
 EXPOSE 8080
+CMD ["./main"]

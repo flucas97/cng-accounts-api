@@ -12,6 +12,6 @@ var (
 // StartApp starts server
 func StartApp() {
 	Routes()
-	logger.Info("Starting server...")
+	logger.Info("Starticng server...")
 	router.Run(":8080")
 }
