@@ -9,9 +9,9 @@ var (
 	router = gin.Default()
 )
 
-// StartApp starts server
+// StartApp starts the service
 func StartApp() {
 	Routes()
-	logger.Info("Starticng server...")
+	logger.Info("Starting server...")
 	router.Run(":8081")
 }
