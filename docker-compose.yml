@@ -2,8 +2,23 @@ version: '3'
 
 services:
   api:
-    build: .
-    volumes:
-      - ./go/src/github.com/flucas97/CNG-checknogreen/
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
       - "8081:8081"
+    restart: unless-stopped
+    depends_on: 
+      - database
+  
+  database:
+    image: postgres:9.6
+    container_name: "postgres"
+    environment:
+      - POSTGRES_DB=CNG-Account
+      - POSTGRES_USER=postgres
+      - TZ=GMT
+    volumes:
+      - "./data/postgres:/var/lib/postgresql/data"
+    ports:
+      - 5432:5432
