@@ -3,32 +3,40 @@ package accounts_db
 import (
 	"database/sql"
 	"fmt"
+	"os"
 
 	"github.com/flucas97/CNG-checknogreen/account/utils/logger"
 	_ "github.com/lib/pq"
 )
 
 const (
-	postgrsql_host           = "localhost"
-	postgrsql_port           = 5432
-	postgrsql_user           = "master"
-	postgrsql_password       = "master"
-	postgrsql_database_bname = "CNG-Account"
+	psql_cng_accounts_username = "psql_cng_accounts_username"
+	psql_cng_accounts_password = "psql_cng_accounts_password"
+	psql_cng_accounts_root     = "psql_cng_accounts_root"
+	psql_cng_accounts_schema   = "psql_cng_accounts_schema"
+	psql_cng_accounts_port     = 5432
 )
 
 var (
-	Client *sql.DB
+	Client   *sql.DB
+	username = os.Getenv(psql_cng_accounts_username)
+	password = os.Getenv(psql_cng_accounts_password)
+	root     = os.Getenv(psql_cng_accounts_root)
+	schema   = os.Getenv(psql_cng_accounts_schema)
+	port     = psql_cng_accounts_port
 )
 
 func init() {
 	var err error
+
+	fmt.Println(username)
 	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s "+
 		"password=%s dbname=%s sslmode=disable",
-		postgrsql_host,
-		postgrsql_port,
-		postgrsql_user,
-		postgrsql_password,
-		postgrsql_database_bname,
+		root,
+		port,
+		username,
+		password,
+		schema,
 	)
 
 	Client, err = sql.Open("postgres", psqlInfo)
