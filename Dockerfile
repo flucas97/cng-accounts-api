@@ -1,5 +1,5 @@
 FROM golang:latest
-LABEL maintainer="flucas97 <feijolucas19972gmail.com>"
+LABEL maintainer="flucas97 <feijolucas1997gmail.com>"
 
 WORKDIR /account
 COPY go.mod ./

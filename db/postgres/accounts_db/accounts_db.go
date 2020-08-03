@@ -29,7 +29,6 @@ var (
 func init() {
 	var err error
 
-	fmt.Println(username)
 	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s "+
 		"password=%s dbname=%s sslmode=disable",
 		root,
