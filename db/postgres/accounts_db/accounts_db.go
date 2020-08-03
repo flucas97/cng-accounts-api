@@ -29,12 +29,11 @@ var (
 func init() {
 	var err error
 
-	psqlInfo := fmt.Sprintf("host=%s port=%d user=%s "+
-		"password=%s dbname=%s sslmode=disable",
-		root,
-		port,
+	psqlInfo := fmt.Sprintf("postgres://%v:%v@%v:%v/%v?sslmode=disable",
 		username,
 		password,
+		root,
+		port,
 		schema,
 	)
 
