@@ -1,6 +1,6 @@
-FROM postgres:11
+FROM postgres:9.3
 
-COPY ./create_db.sh /docker-entrypoint-initdb.d/20-create_db.sh
-COPY /db/postgres/schema/schema.sql /db/postgres/schema/schema.sql
-
-RUN chmod +x /docker-entrypoint-initdb.d/20-create_db.sh
+ENV POSTGRES_USER docker
+ENV POSTGRES_PASSWORD docker
+ENV POSTGRES_DB docker
+ADD ./db/postgres/schema/schema.sql /docker-entrypoint-initdb.d/

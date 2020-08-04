@@ -43,6 +43,8 @@ func init() {
 		panic(err)
 	}
 
+	logger.Info(username)
+
 	err = Client.Ping()
 	if err != nil {
 		logger.Error("cannot ping database", err)

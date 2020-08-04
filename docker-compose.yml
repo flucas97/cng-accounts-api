@@ -2,14 +2,17 @@ version: '3'
 
 services:
   db:
-    image: postgres
+    image: postgres:latest
     environment:
-      POSTGRES_USER: master
-      POSTGRES_PASSWORD: master
-    expose:
-      - 5432
+      POSTGRES_USER: "postgres"
+      POSTGRES_PASSWORD: "postgres"
+      POSTGRES_DB: "cng_account"
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./internal/model/sql/postgres/schema:/docker-entrypoint-initdb.d
 
-  myapp:
+  api:
     build: .
     image: cng_account_api
     environment:
@@ -20,3 +23,7 @@ services:
       - 8081
     depends_on:
       - db
+      
+networks:
+  default:
+    driver: bridge
