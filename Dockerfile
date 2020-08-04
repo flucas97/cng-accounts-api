@@ -6,22 +6,15 @@ LABEL maintainer="flucas97 <feijolucas1997gmail.com>"
 ARG app_env
 ENV APP_ENV $app_env
 
-WORKDIR /account
-COPY go.mod go.sum ./
+WORKDIR /app/src/accounts
+
+ENV GOPATH=/app
+COPY . /app/src/accounts
+
 RUN go mod download
 
-COPY . .
-
 RUN go get ./
-RUN go build 
+RUN go build main.go
 
-CMD if [ ${APP_ENV} = production ]; \
-	then \
-	api; \
-	else \
-	go get github.com/pilu/fresh && \
-	fresh; \
-	fi
-
-
+ENTRYPOINT [ "./main" ]
 EXPOSE 8081
