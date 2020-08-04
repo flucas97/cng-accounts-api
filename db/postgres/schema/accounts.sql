@@ -1,4 +1,4 @@
-CREATE TABLE accounts (
+CREATE TABLE public.account (
     id serial primary key,
     name text not null unique,
     email text not null unique,
@@ -14,6 +14,3 @@ CREATE TABLE accounts (
     updated_at timestamp NOT NULL DEFAULT now(),
     created_at timestamp NOT NULL DEFAULT now()
 );
-
-ALTER TABLE accounts OWNER TO master;
-GRANT ALL ON TABLE accounts TO master;
