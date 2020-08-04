@@ -14,5 +14,6 @@ CREATE TABLE accounts (
     updated_at timestamp NOT NULL DEFAULT now(),
     created_at timestamp NOT NULL DEFAULT now()
 );
+
 ALTER TABLE accounts OWNER TO master;
 GRANT ALL ON TABLE accounts TO master;
