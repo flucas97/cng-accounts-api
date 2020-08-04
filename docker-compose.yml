@@ -12,14 +12,15 @@ services:
     volumes:
       - ./internal/model/sql/postgres/schema:/docker-entrypoint-initdb.d
   api:
-    build: .
-    image: cng_account_api
-    environment:
-      APP_DB_HOST: "172.24.0.2"
-      APP_DB_USER: "postgres"
-      APP_DB_PASSWORD: "postgres"
-    expose:
-      - 8081
+    image: golang:1.13
+    volumes:
+      - .:/app/account
+    working_dir: /app/account
+    env_file:
+      - development.env
+    command: go run . -v
+    ports:
+      - "8081:8081"
     depends_on:
       - db
 
