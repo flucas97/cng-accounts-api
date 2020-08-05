@@ -36,7 +36,7 @@ func Validate(c *gin.Context) {
 	var account accounts.Account
 
 	if err := c.ShouldBindJSON(&account); err != nil {
-		RestErr := error_factory.NewBadRequestError("Invalid JSON body")
+		RestErr := error_factory.NewBadRequestError("invalid JSON body")
 		c.JSON(RestErr.Status, RestErr)
 		return
 	}
@@ -59,7 +59,7 @@ func ShowDetails(c *gin.Context) {
 	var accountName accounts.Account
 
 	if err := c.ShouldBindJSON(&accountName); err != nil {
-		RestErr := error_factory.NewBadRequestError("Invalid JSON body")
+		RestErr := error_factory.NewBadRequestError("invalid JSON body")
 		c.JSON(RestErr.Status, RestErr)
 		return
 	}

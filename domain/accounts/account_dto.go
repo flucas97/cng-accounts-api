@@ -33,15 +33,15 @@ func (a *Account) Validate() *error_factory.RestErr {
 	a.Password = strings.TrimSpace(a.Password)
 
 	if a.Password == "" {
-		return error_factory.NewBadRequestError("Invalid password")
+		return error_factory.NewBadRequestError("invalid password")
 	}
 
 	if a.Email == "" || !isValidEmail(a.Email) {
-		return error_factory.NewBadRequestError("Invalid email address")
+		return error_factory.NewBadRequestError("invalid email address")
 	}
 
 	if a.Name == "" {
-		return error_factory.NewBadRequestError("Invalid name")
+		return error_factory.NewBadRequestError("invalid name")
 	}
 
 	return nil
