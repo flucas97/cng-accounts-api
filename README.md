@@ -1,6 +1,8 @@
 # {CNG} Accounts micro service
 
-Info about Accounts
+### Running service:
+
+$ docker-compose up
 
 ### Avaliable routes:
 
