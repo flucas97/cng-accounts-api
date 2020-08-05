@@ -2,7 +2,6 @@ package accounts_service
 
 import (
 	"github.com/flucas97/CNG-checknogreen/account/domain/accounts"
-	"github.com/flucas97/CNG-checknogreen/account/utils/crypto"
 	"github.com/flucas97/CNG-checknogreen/account/utils/error_factory"
 )
 
@@ -28,6 +27,8 @@ func (as *accountsService) Create(account accounts.Account) (*accounts.Account, 
 		return nil, err
 	}
 
+	account.EncryptPassword()
+
 	if err := account.Create(); err != nil {
 		return nil, err
 	}
@@ -42,9 +43,11 @@ func (as *accountsService) Update() {
 
 // Validate Account
 func (as *accountsService) Validate(credentials accounts.Account) (bool, *error_factory.RestErr) {
+	credentials.EncryptPassword()
+
 	requestLogin := &accounts.Account{
 		Name:     credentials.Name,
-		Password: crypto.GetMd5(credentials.Password),
+		Password: credentials.Password,
 	}
 
 	result, err := requestLogin.ValidateAccount()

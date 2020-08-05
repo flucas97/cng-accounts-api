@@ -16,6 +16,7 @@ const (
 	queryShowDetails   = ("SELECT id, name, email, country, city, description, created_at, updated_at FROM account WHERE name=$1;")
 	statusActive       = "active"
 	statusEnded        = "ended"
+	statusFreeze       = "freeze"
 )
 
 // Create Account

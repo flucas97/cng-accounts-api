@@ -3,6 +3,7 @@ package accounts
 import (
 	"strings"
 
+	"github.com/flucas97/CNG-checknogreen/account/utils/crypto"
 	"github.com/flucas97/CNG-checknogreen/account/utils/error_factory"
 )
 
@@ -26,7 +27,12 @@ type Account struct {
 
 func (a *Account) Validate() *error_factory.RestErr {
 	a.Email = strings.TrimSpace(strings.ToLower(a.Email))
-	a.Name = strings.TrimSpace(strings.ToLower(a.Email))
+	a.Name = strings.TrimSpace(strings.ToLower(a.Name))
+	a.Password = strings.TrimSpace(a.Password)
+
+	if a.Password == "" {
+		return error_factory.NewBadRequestError("Invalid password")
+	}
 
 	if a.Email == "" {
 		return error_factory.NewBadRequestError("Invalid email address")
@@ -37,4 +43,9 @@ func (a *Account) Validate() *error_factory.RestErr {
 	}
 
 	return nil
+}
+
+func (a *Account) EncryptPassword() {
+	a.Password = crypto.GetMd5(a.Password)
+	return
 }
