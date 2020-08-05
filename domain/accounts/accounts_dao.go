@@ -11,9 +11,9 @@ import (
 )
 
 const (
-	queryCreateAccount = ("INSERT INTO accounts (name, email, language, password, country, city, description, status, created_at, updated_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING id;")
-	queryLogin         = ("SELECT name, password FROM accounts WHERE name=$1 AND password=$2;")
-	queryShowDetails   = ("SELECT id, name, email, country, city, description, created_at, updated_at FROM accounts WHERE name=$1;")
+	queryCreateAccount = ("INSERT INTO account (name, email, language, password, country, city, description, status, created_at, updated_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING id;")
+	queryLogin         = ("SELECT name, password FROM account WHERE name=$1 AND password=$2;")
+	queryShowDetails   = ("SELECT id, name, email, country, city, description, created_at, updated_at FROM account WHERE name=$1;")
 	statusActive       = "active"
 	statusEnded        = "ended"
 )

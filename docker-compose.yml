@@ -10,7 +10,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./internal/model/sql/postgres/schema:/docker-entrypoint-initdb.d
+      - ./db/postgres/schema:/docker-entrypoint-initdb.d
   api:
     image: golang:1.13
     volumes:
