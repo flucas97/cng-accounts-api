@@ -5,6 +5,12 @@ import (
 	"github.com/flucas97/CNG-checknogreen/account/utils/error_factory"
 )
 
+const (
+	statusActive = "active"
+	statusEnded  = "ended"
+	statusFreeze = "freeze"
+)
+
 type AccountsServiceInterface interface {
 	Create(accounts.Account) (*accounts.Account, *error_factory.RestErr)
 	Update()
@@ -27,7 +33,7 @@ func (as *accountsService) Create(account accounts.Account) (*accounts.Account, 
 		return nil, err
 	}
 
-	account.EncryptPassword()
+	account.PrepareFields(statusActive)
 
 	if err := account.Create(); err != nil {
 		return nil, err

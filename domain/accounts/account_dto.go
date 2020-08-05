@@ -5,6 +5,7 @@ import (
 	"strings"
 
 	"github.com/flucas97/CNG-checknogreen/account/utils/crypto"
+	"github.com/flucas97/CNG-checknogreen/account/utils/date"
 	"github.com/flucas97/CNG-checknogreen/account/utils/error_factory"
 )
 
@@ -51,7 +52,29 @@ func isValidEmail(email string) bool {
 	return regex.MatchString(email)
 }
 
+// EncryptPassword to use while manipulating against database
 func (a *Account) EncryptPassword() {
 	a.Password = crypto.GetMd5(a.Password)
 	return
+}
+
+// SetCreatedAtDay to use when one account request freeze, cancel or active
+func (a *Account) UpdateStatus(newStatus string) {
+	a.Status = newStatus
+}
+
+func (a *Account) setCreatedAtDay() {
+	a.CreatedAt = date.GetNowString()
+}
+
+// SetUpdatedAtDay to use always when one account is somehow changed
+func (a *Account) SetUpdatedAtDay() {
+	a.UpdatedAt = date.GetNowString()
+}
+
+// PrepareFields to use when one account is new and, to fill up the internal fields
+func (a *Account) PrepareFields(status string) {
+	a.setCreatedAtDay()
+	a.SetUpdatedAtDay()
+	a.UpdateStatus(status)
 }
