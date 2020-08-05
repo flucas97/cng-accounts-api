@@ -3,7 +3,6 @@ package accounts_db
 import (
 	"database/sql"
 	"fmt"
-	"os"
 
 	"github.com/flucas97/CNG-checknogreen/account/utils/logger"
 	_ "github.com/lib/pq"
@@ -19,10 +18,10 @@ const (
 
 var (
 	Client   *sql.DB
-	username = os.Getenv(psql_cng_accounts_username)
-	password = os.Getenv(psql_cng_accounts_password)
-	root     = os.Getenv(psql_cng_accounts_root)
-	schema   = os.Getenv(psql_cng_accounts_schema)
+	username = "postgres"
+	password = "postgres"
+	root     = "db"
+	schema   = "cng_account"
 	port     = psql_cng_accounts_port
 )
 
