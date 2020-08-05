@@ -7,10 +7,10 @@ import (
 
 // Routes map all avaliable routes
 func Routes() {
-	router.GET("/ping", ping.Ping)
+	router.GET("/api/ping", ping.Ping)
 
 	// accounts
-	router.POST("/new-account", accounts_controller.Create)
-	router.POST("/validate", accounts_controller.Validate)
-	router.POST("/account-details", accounts_controller.ShowDetails)
+	router.POST("/api/new-account", accounts_controller.Create)
+	router.POST("/api/validate", accounts_controller.Validate)
+	router.POST("/api/account-details", accounts_controller.ShowDetails)
 }
