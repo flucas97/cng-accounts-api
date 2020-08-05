@@ -1,6 +1,7 @@
 package accounts
 
 import (
+	"regexp"
 	"strings"
 
 	"github.com/flucas97/CNG-checknogreen/account/utils/crypto"
@@ -34,7 +35,7 @@ func (a *Account) Validate() *error_factory.RestErr {
 		return error_factory.NewBadRequestError("Invalid password")
 	}
 
-	if a.Email == "" {
+	if a.Email == "" || !isValidEmail(a.Email) {
 		return error_factory.NewBadRequestError("Invalid email address")
 	}
 
@@ -43,6 +44,11 @@ func (a *Account) Validate() *error_factory.RestErr {
 	}
 
 	return nil
+}
+
+func isValidEmail(email string) bool {
+	regex := regexp.MustCompile("^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$")
+	return regex.MatchString(email)
 }
 
 func (a *Account) EncryptPassword() {

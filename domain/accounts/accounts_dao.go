@@ -4,14 +4,13 @@ import (
 	"strings"
 
 	"github.com/flucas97/CNG-checknogreen/account/db/postgres/accounts_db"
-	"github.com/flucas97/CNG-checknogreen/account/utils/crypto"
 	"github.com/flucas97/CNG-checknogreen/account/utils/date"
 	"github.com/flucas97/CNG-checknogreen/account/utils/error_factory"
 	"github.com/flucas97/CNG-checknogreen/account/utils/logger"
 )
 
 const (
-	queryCreateAccount = ("INSERT INTO account (name, email, language, password, country, city, description, status, created_at, updated_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) RETURNING id;")
+	queryCreateAccount = ("INSERT INTO account (name, email, language, password, country, city, description, status, created_at, updated_at) VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) ON CONFLICT DO NOTHING RETURNING id;")
 	queryLogin         = ("SELECT name, password FROM account WHERE name=$1 AND password=$2;")
 	queryShowDetails   = ("SELECT id, name, email, country, city, description, created_at, updated_at FROM account WHERE name=$1;")
 	statusActive       = "active"
@@ -22,17 +21,17 @@ const (
 // Create Account
 func (account *Account) Create() *error_factory.RestErr {
 	var err error
+	var accountID int
+
 	if err = accounts_db.Client.Ping(); err != nil {
 		panic(err)
 	}
 
 	account.CreatedAt, account.UpdatedAt, account.Status = date.GetNowString(), date.GetNowString(), statusActive
-	account.Password = crypto.GetMd5(account.Password)
 
-	accountID := 0
 	err = accounts_db.Client.QueryRow(queryCreateAccount, account.Name, account.Email, account.Language, account.Password, account.Country, account.City, account.Description, account.Status, account.CreatedAt, account.UpdatedAt).Scan(&accountID)
 	if err != nil {
-		if strings.Contains(err.Error(), "duplicate key value") {
+		if strings.Contains(err.Error(), "no rows in result set") {
 			return error_factory.NewBadRequestError("email or account already exists.")
 		}
 		logger.Error("error querying row", err)
