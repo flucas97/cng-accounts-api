@@ -2,7 +2,7 @@
 
 ### Running service:
 
-$ docker-compose up
+$ make run 
 
 ### Avaliable routes:
 
