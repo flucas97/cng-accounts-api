@@ -77,4 +77,5 @@ func (a *Account) PrepareFields(status string) {
 	a.setCreatedAtDay()
 	a.SetUpdatedAtDay()
 	a.UpdateStatus(status)
+	a.EncryptPassword()
 }
