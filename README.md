@@ -8,6 +8,6 @@ Golang with Gin router and Postgres as database.
 ### Avaliable routes:
 
 #### POST
-path: /validate
-path: /new-account
-path: /account-details
+- /api/validate
+- /api/new-account
+- /api/account-details
