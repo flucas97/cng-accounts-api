@@ -1,7 +1,7 @@
 -- public.account definition
 -- Drop table
--- DROP TABLE public.account;
-CREATE TABLE account (
+DROP TABLE IF EXISTS public.account;
+CREATE TABLE public.account (
     id serial primary key,
     name text not null unique,
     email text not null unique,
@@ -18,7 +18,7 @@ CREATE TABLE account (
     created_at timestamp NOT NULL DEFAULT now()
 );
 
-CREATE OR REPLACE VIEW metrics
+CREATE OR REPLACE VIEW public.metrics
   AS SELECT
     account.id,
     account.name,
@@ -36,5 +36,5 @@ CREATE OR REPLACE VIEW metrics
     account.created_at
    FROM account;
 
-ALTER TABLE account OWNER TO postgres;
-GRANT ALL ON TABLE account TO postgres;
+ALTER TABLE public.account OWNER TO postgres;
+GRANT ALL ON TABLE public.account TO postgres;
