@@ -1,16 +1,13 @@
 # {CNG} Accounts micro service
+Golang with Gin router and Postgres as database.
 
 ### Running service:
 
-$ make run 
+#### `$ make` 
 
 ### Avaliable routes:
 
 #### POST
-path: /validate
-
-#### POST 
-path: /new-account
-
-#### POST
-path: /account-details
+- /api/validate
+- /api/new-account
+- /api/account-details
