@@ -16,6 +16,7 @@ const (
 	psql_cng_accounts_port     = 5432
 )
 
+// need to use env instead hardcoded
 var (
 	Client   *sql.DB
 	username = "postgres"
