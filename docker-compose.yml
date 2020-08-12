@@ -11,7 +11,10 @@ services:
       - 5433:5432
     volumes:
       - ./db/postgres/schema:/docker-entrypoint-initdb.d
-  api:
+    networks:
+      - cng-baguera-auth-api_default
+  
+  accounts_api:
     image: golang:1.13
     volumes:
       - .:/app/account
@@ -25,9 +28,12 @@ services:
       - "db:db"
     expose:
       - "8081"
+    restart: always
     depends_on:
       - db
+    networks:
+      - cng-baguera-auth-api_default
 
 networks:
-  default:
-    driver: bridge
+  cng-baguera-auth-api_default:
+    external: true
