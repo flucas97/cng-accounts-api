@@ -7,7 +7,6 @@ import (
 	"github.com/flucas97/CNG-checknogreen/account/domain/accounts"
 	"github.com/flucas97/CNG-checknogreen/account/services/accounts_service"
 	"github.com/flucas97/CNG-checknogreen/account/utils/error_factory"
-	"github.com/flucas97/CNG-checknogreen/account/utils/logger"
 	"github.com/flucas97/CNG-checknogreen/account/utils/success_response"
 	"github.com/gin-gonic/gin"
 )
@@ -18,7 +17,7 @@ var (
 
 func Create(c *gin.Context) {
 	var account accounts.Account
-	logger.Info("entrou")
+
 	if err := c.ShouldBindJSON(&account); err != nil {
 		RestErr := error_factory.NewBadRequestError("Invalid JSON body")
 		fmt.Println(err.Error())
@@ -31,6 +30,7 @@ func Create(c *gin.Context) {
 		c.JSON(err.Status, err)
 		return
 	}
+
 	c.Header("nick_name", account.Name)
 	c.JSON(http.StatusCreated, result)
 }
