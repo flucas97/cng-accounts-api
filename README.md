@@ -1,5 +1,5 @@
-# {CNG} Accounts micro service
-Golang with Gin router and Postgres as database.
+# {CNG} Accounts microservice
+Accounts microservice, with Go using Gin and Postgres
 
 ### Running service:
 
