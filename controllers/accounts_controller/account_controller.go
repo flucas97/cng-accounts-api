@@ -3,6 +3,7 @@ package accounts_controller
 import (
 	"fmt"
 	"net/http"
+	"strconv"
 
 	"github.com/flucas97/CNG-checknogreen/account/domain/accounts"
 	"github.com/flucas97/CNG-checknogreen/account/services/accounts_service"
@@ -31,6 +32,7 @@ func Create(c *gin.Context) {
 		return
 	}
 
+	c.Header("account_id", strconv.Itoa(int(result.ID)))
 	c.Header("nick_name", account.Name)
 	c.JSON(http.StatusCreated, result)
 }
