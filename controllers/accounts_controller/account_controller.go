@@ -43,20 +43,19 @@ func Validate(c *gin.Context) {
 		c.JSON(RestErr.Status, RestErr)
 		return
 	}
-
 	result, err := accountsService.Validate(account)
 	if err != nil {
 		c.JSON(err.Status, err)
 		return
 	}
 
-	if result {
-		c.JSON(http.StatusOK, success_response.Found("successfully validate"))
+	if !result {
+		c.JSON(http.StatusNotFound, result)
 		return
 	}
-
 	c.Header("nick_name", account.Name)
-	c.JSON(http.StatusNotFound, result)
+	c.JSON(http.StatusOK, success_response.Found("successfully validate"))
+
 }
 
 func ShowDetails(c *gin.Context) {
