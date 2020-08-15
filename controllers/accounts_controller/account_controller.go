@@ -1,7 +1,6 @@
 package accounts_controller
 
 import (
-	"fmt"
 	"net/http"
 	"strconv"
 
@@ -21,7 +20,6 @@ func Create(c *gin.Context) {
 
 	if err := c.ShouldBindJSON(&account); err != nil {
 		RestErr := error_factory.NewBadRequestError("Invalid JSON body")
-		fmt.Println(err.Error())
 		c.JSON(RestErr.Status, RestErr)
 		return
 	}

@@ -19,7 +19,7 @@ type Account struct {
 	Country              string   `json:"country"`
 	State                string   `json:"state"`
 	AvaliableFeatures    []string `json:"avaliable_features"`
-	CannabisRepositoryID int64    `belongs_to:"cannabis_repository_id" json:"cannabis_repository_id"`
+	CannabisRepositoryID int64    `json:"cannabis_repository_id"`
 	Description          string   `json:"description"`
 	Language             string   `json:"language"`
 	Status               string   `json:"status"`
