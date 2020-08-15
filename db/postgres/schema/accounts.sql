@@ -2,18 +2,18 @@
 -- Drop table
 DROP TABLE IF EXISTS account;
 CREATE TABLE account (
-    id serial primary key,
-    name text not null unique,
-    email text not null unique,
-    password text not null,
-    city text,
-    country text,
-    state text,
-    avaliable_features text,
-    cannabis_repository_id int,
-    description varchar(255),
-    language text,
-    status text not null,
-    updated_at timestamp NOT NULL DEFAULT now(),
-    created_at timestamp NOT NULL DEFAULT now()
+    id serial PRIMARY KEY,
+    name VARCHAR NOT NULL UNIQUE,
+    email VARCHAR NOT NULL UNIQUE,
+    password VARCHAR NOT NULL,
+    city VARCHAR,
+    country VARCHAR,
+    state VARCHAR,
+    avaliable_features VARCHAR,
+    cannabis_repository_id INTEGER,
+    description VARCHAR(255),
+    language VARCHAR,
+    status VARCHAR NOT NULL,
+    updated_at TIMESTAMP NOT NULL DEFAULT now(),
+    created_at TIMESTAMP NOT NULL DEFAULT now()
 );
