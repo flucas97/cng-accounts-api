@@ -23,14 +23,22 @@ type cannabisRepositoryInterface interface {
 type cannabisRepositoryService struct{}
 
 func (crs cannabisRepositoryService) NewRepository(a *accounts.Account) (string, *error_factory.RestErr) {
-	fmt.Printf("account ID %v name %v \n", a.ID, a.Name)
-	values := map[string]string{"name": a.Name, "account_id": strconv.Itoa(int(a.ID))}
+	values := struct {
+		name       string
+		account_id string
+	}{
+		a.Name,
+		strconv.Itoa(int(a.ID)),
+	}
+
+	buffer := new(bytes.Buffer)
+	json.NewEncoder(buffer).Encode(values)
 	jsonValue, _ := json.Marshal(values)
 
 	r, err := http.Post(cannabisServiceURI+"create-repository", "application/json", bytes.NewBuffer(jsonValue))
 	if err != nil {
 		return "", error_factory.NewInternalServerError(err.Error())
 	}
-
-	return r.Header.Get("cannabis_repository_id"), nil
+	fmt.Printf("cannabis repository ID >>> @@@ %v\n", r.Header.Get("repository_id"))
+	return r.Header.Get("repository_id"), nil
 }

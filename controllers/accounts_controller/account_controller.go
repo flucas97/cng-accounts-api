@@ -40,7 +40,7 @@ func Create(c *gin.Context) {
 		return
 	}
 
-	c.Header("cannabis_repository_id", cannabisRepositoryId)
+	c.Header("repository_id", cannabisRepositoryId)
 	c.Header("account_id", strconv.Itoa(int(result.ID)))
 	c.Header("nick_name", account.Name)
 	c.JSON(http.StatusCreated, result)
