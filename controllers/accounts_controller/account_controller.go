@@ -1,18 +1,21 @@
 package accounts_controller
 
 import (
+	"fmt"
 	"net/http"
 	"strconv"
 
 	"github.com/flucas97/CNG-checknogreen/account/domain/accounts"
 	"github.com/flucas97/CNG-checknogreen/account/services/accounts_service"
+	repository_service "github.com/flucas97/CNG-checknogreen/account/services/repository_service/cannabis"
 	"github.com/flucas97/CNG-checknogreen/account/utils/error_factory"
 	"github.com/flucas97/CNG-checknogreen/account/utils/success_response"
 	"github.com/gin-gonic/gin"
 )
 
 var (
-	accountsService = accounts_service.AccountsService
+	accountsService    = accounts_service.AccountsService
+	cRepositoryService = repository_service.CannabisRepositoryService
 )
 
 func Create(c *gin.Context) {
@@ -30,6 +33,14 @@ func Create(c *gin.Context) {
 		return
 	}
 
+	cannabisRepositoryId, err := cRepositoryService.NewRepository(result)
+	if err != nil {
+		fmt.Println(err)
+		c.JSON(err.Status, err)
+		return
+	}
+
+	c.Header("cannabis_repository_id", cannabisRepositoryId)
 	c.Header("account_id", strconv.Itoa(int(result.ID)))
 	c.Header("nick_name", account.Name)
 	c.JSON(http.StatusCreated, result)
