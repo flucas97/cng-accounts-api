@@ -22,8 +22,13 @@ type cannabisRepositoryInterface interface {
 type cannabisRepositoryService struct{}
 
 func (crs cannabisRepositoryService) NewRepository(a *accounts.Account) (string, *error_factory.RestErr) {
-	values := map[string]interface{}{"name": a.Name, "account_id": strconv.Itoa(int(a.ID))}
+	values := map[string]interface{}{
+		"name":       a.Name,
+		"account_id": strconv.Itoa(int(a.ID)),
+	}
+
 	buffer := new(bytes.Buffer)
+
 	json.NewEncoder(buffer).Encode(values)
 	jsonValue, _ := json.Marshal(values)
 
