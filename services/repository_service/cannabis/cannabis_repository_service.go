@@ -12,7 +12,7 @@ import (
 
 var (
 	CannabisRepositoryService cannabisRepositoryInterface = &cannabisRepositoryService{}
-	cannabisServiceURI                                    = "http://172.30.0.7:8083/api/"
+	cannabisServiceURI                                    = "http://172.30.0.3:8083/api/"
 )
 
 type cannabisRepositoryInterface interface {
