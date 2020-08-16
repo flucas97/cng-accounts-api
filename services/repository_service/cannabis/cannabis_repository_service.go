@@ -3,7 +3,6 @@ package repository_service
 import (
 	"bytes"
 	"encoding/json"
-	"fmt"
 	"net/http"
 	"strconv"
 
@@ -39,6 +38,6 @@ func (crs cannabisRepositoryService) NewRepository(a *accounts.Account) (string,
 	if err != nil {
 		return "", error_factory.NewInternalServerError(err.Error())
 	}
-	fmt.Printf("cannabis repository ID >>> @@@ %v\n", r.Header.Get("repository_id"))
+
 	return r.Header.Get("repository_id"), nil
 }
