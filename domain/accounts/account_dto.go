@@ -19,7 +19,7 @@ type Account struct {
 	Country              string   `json:"country"`
 	State                string   `json:"state"`
 	AvaliableFeatures    []string `json:"avaliable_features"`
-	CannabisRepositoryID int64    `json:"cannabis_repository_id"`
+	CannabisRepositoryID string   `json:"cannabis_repository_id"`
 	Description          string   `json:"description"`
 	Language             string   `json:"language"`
 	Status               string   `json:"status"`
@@ -70,6 +70,10 @@ func (a *Account) setCreatedAtDay() {
 // SetUpdatedAtDay to use always when one account is somehow changed
 func (a *Account) SetUpdatedAtDay() {
 	a.UpdatedAt = date.GetNowString()
+}
+
+func (a *Account) setCannabisRepositoryId(id string) {
+	a.CannabisRepositoryID = id
 }
 
 // PrepareFields to use when one account is new and, to fill up the internal fields
