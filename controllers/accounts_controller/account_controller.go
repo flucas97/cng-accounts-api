@@ -39,7 +39,9 @@ func Create(c *gin.Context) {
 		c.JSON(err.Status, err)
 		return
 	}
-
+	/*
+		TODO: save cannabis repository ID into psql
+	*/
 	c.Header("repository_id", cannabisRepositoryId)
 	c.Header("account_id", strconv.Itoa(int(result.ID)))
 	c.Header("nick_name", account.Name)
