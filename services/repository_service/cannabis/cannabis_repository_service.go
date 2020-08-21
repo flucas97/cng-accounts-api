@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"net/http"
+	"os"
 	"strconv"
 
 	"github.com/flucas97/CNG-checknogreen/account/domain/accounts"
@@ -12,7 +13,7 @@ import (
 
 var (
 	CannabisRepositoryService cannabisRepositoryInterface = &cannabisRepositoryService{}
-	cannabisServiceURI                                    = "http://172.30.0.8:8083/api/"
+	cannabisServiceURI                                    = os.Getenv("CANNABIS_BASE_URL")
 )
 
 type cannabisRepositoryInterface interface {
