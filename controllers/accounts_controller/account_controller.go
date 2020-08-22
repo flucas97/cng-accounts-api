@@ -43,9 +43,9 @@ func Create(c *gin.Context) {
 		TODO: save cannabis repository ID into psql
 	*/
 
-	c.Header("repository_id", cannabisRepositoryId)
-	c.Header("account_id", strconv.Itoa(int(result.ID)))
-	c.Header("nick_name", account.Name)
+	c.Header("Repository-id", cannabisRepositoryId)
+	c.Header("Account-id", strconv.Itoa(int(result.ID)))
+	c.Header("Nick-name", account.Name)
 	c.JSON(http.StatusCreated, result)
 }
 
@@ -67,7 +67,7 @@ func Validate(c *gin.Context) {
 		c.JSON(http.StatusNotFound, result)
 		return
 	}
-	c.Header("nick_name", account.Name)
+	c.Header("Nick-name", account.Name)
 	c.JSON(http.StatusOK, success_response.Found("successfully validate"))
 
 }
