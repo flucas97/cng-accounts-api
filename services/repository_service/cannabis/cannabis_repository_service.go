@@ -38,5 +38,5 @@ func (crs cannabisRepositoryService) NewRepository(a *accounts.Account) (string,
 		return "", error_factory.NewInternalServerError(err.Error())
 	}
 
-	return r.Header.Get("repository_id"), nil
+	return r.Header.Get("Repository-id"), nil
 }
