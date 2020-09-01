@@ -18,6 +18,7 @@ var (
 	cRepositoryService = repository_service.CannabisRepositoryService
 )
 
+// Create handles the request from the server and persist the new account into psql
 func Create(c *gin.Context) {
 	var account accounts.Account
 
@@ -50,6 +51,7 @@ func Create(c *gin.Context) {
 	c.JSON(http.StatusCreated, result)
 }
 
+// Validate handles the request to check if the passed credentials are valid against psql
 func Validate(c *gin.Context) {
 	var account accounts.Account
 
