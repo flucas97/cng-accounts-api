@@ -25,6 +25,7 @@ func Create(c *gin.Context) {
 	if err := c.ShouldBindJSON(&account); err != nil {
 		RestErr := error_factory.NewBadRequestError("Invalid JSON body")
 		c.JSON(RestErr.Status, RestErr)
+		fmt.Println("caiuuuuuuuu", err)
 		return
 	}
 
