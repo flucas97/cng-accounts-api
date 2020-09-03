@@ -14,8 +14,8 @@ const (
 	queryShowDetails   = ("SELECT id, name, email, country, city, description, created_at, updated_at FROM account WHERE name=$1;")
 )
 
-// Create Account
-func (account *Account) Create() *error_factory.RestErr {
+// New Account
+func (account *Account) New() *error_factory.RestErr {
 	var err error
 	var accountID int
 

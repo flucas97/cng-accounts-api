@@ -23,7 +23,7 @@ func (a *accountFixture) setup(t *testing.T) {
 func TestCreate(t *testing.T) {
 	table := []accountFixture{
 		{
-			testName:    "Create new account with all valid parameters",
+			testName:    "New new account with all valid parameters",
 			expectError: false,
 		},
 		{
@@ -37,7 +37,7 @@ func TestCreate(t *testing.T) {
 		t.Run(fmt.Sprintf("%v-%v", index, f.testName), func(t *testing.T) {
 			f.setup(t)
 
-			err := f.mockAccount.Create()
+			err := f.mockAccount.New()
 			if !f.expectError && err != nil {
 				t.Fatal("an error was not expected, but occurred")
 			}

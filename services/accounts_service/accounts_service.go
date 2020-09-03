@@ -12,7 +12,7 @@ const (
 )
 
 type AccountsServiceInterface interface {
-	Create(accounts.Account) (*accounts.Account, *error_factory.RestErr)
+	New(accounts.Account) (*accounts.Account, *error_factory.RestErr)
 	Update()
 	Validate(accounts.Account) (bool, *error_factory.RestErr)
 	Delete()
@@ -27,15 +27,15 @@ var (
 	AccountsService AccountsServiceInterface = &accountsService{}
 )
 
-// Create Account
-func (as *accountsService) Create(account accounts.Account) (*accounts.Account, *error_factory.RestErr) {
+// New Account
+func (as *accountsService) New(account accounts.Account) (*accounts.Account, *error_factory.RestErr) {
 	if err := account.Validate(); err != nil {
 		return nil, err
 	}
 
 	account.PrepareFields(statusActive)
 
-	if err := account.Create(); err != nil {
+	if err := account.New(); err != nil {
 		return nil, err
 	}
 
