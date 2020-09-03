@@ -10,7 +10,7 @@ func Routes() {
 	router.GET("/api/ping", ping.Ping)
 
 	// accounts
-	router.POST("/api/new-account", accounts_controller.Create)
+	router.POST("/api/signup", accounts_controller.New)
 	router.POST("/api/validate", accounts_controller.Validate)
 	router.POST("/api/account-details", accounts_controller.ShowDetails)
 }
