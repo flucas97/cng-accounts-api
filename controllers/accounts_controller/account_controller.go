@@ -29,13 +29,13 @@ func New(c *gin.Context) {
 		return
 	}
 
-	result, err := accountsService.Create(account)
+	result, err := accountsService.New(account)
 	if err != nil {
 		c.JSON(err.Status, err)
 		return
 	}
 
-	cannabisRepositoryId, err := cRepositoryService.NewRepository(result)
+	cannabisRepositoryID, err := cRepositoryService.NewRepository(result)
 	if err != nil {
 		fmt.Println(err)
 		c.JSON(err.Status, err)
