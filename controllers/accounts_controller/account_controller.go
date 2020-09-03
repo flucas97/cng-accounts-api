@@ -18,8 +18,8 @@ var (
 	cRepositoryService = repository_service.CannabisRepositoryService
 )
 
-// Create handles the request from the server and persist the new account into psql
-func Create(c *gin.Context) {
+// New handles the request from the server and persist the new account into psql
+func New(c *gin.Context) {
 	var account accounts.Account
 
 	if err := c.ShouldBindJSON(&account); err != nil {
@@ -45,8 +45,8 @@ func Create(c *gin.Context) {
 		TODO: save cannabis repository ID into psql
 	*/
 
-	fmt.Println("repository ID from account ", cannabisRepositoryId)
-	c.Header("Repository-id", cannabisRepositoryId)
+	fmt.Println("repository ID from account ", cannabisRepositoryID)
+	c.Header("Repository-id", cannabisRepositoryID)
 	c.Header("Account-id", strconv.Itoa(int(result.ID)))
 	c.Header("Nick-name", account.Name)
 	c.JSON(http.StatusCreated, result)
@@ -76,6 +76,7 @@ func Validate(c *gin.Context) {
 
 }
 
+// ShowDetails get all info about one specific account
 func ShowDetails(c *gin.Context) {
 	var accountName accounts.Account
 
