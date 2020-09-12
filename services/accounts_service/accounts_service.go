@@ -67,12 +67,16 @@ func (as *accountsService) Validate(credentials accounts.Account) (bool, *error_
 
 // Delete Account
 func (as *accountsService) Delete() {
-
+	/*
+		TODO: implement Delete Account method
+	*/
 }
 
 // Freeze Account
 func (as *accountsService) Freeze() {
-
+	/*
+		TODO: implement Freeze Account method, with propose of inactivate an account
+	*/
 }
 
 func (as *accountsService) ShowDetails(account accounts.Account) (*accounts.Account, *error_factory.RestErr) {
