@@ -11,6 +11,7 @@ const (
 	statusFreeze = "freeze"
 )
 
+// AccountsServiceInterface has all the methods implemented by this microservice
 type AccountsServiceInterface interface {
 	New(accounts.Account) (*accounts.Account, *error_factory.RestErr)
 	Update()
